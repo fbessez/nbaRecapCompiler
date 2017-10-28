@@ -11,14 +11,6 @@ All you need to do is run: ```python2.7 nbaRecapCompiler.py number_of_days_ago_y
 [youtube-dl](https://rg3.github.io/youtube-dl/) & 
 [beautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
 
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-
 ## Authors
 
 * **Fabien Bessez** -- [fbessez](https://github.com/fbessez)
