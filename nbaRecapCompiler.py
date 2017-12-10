@@ -4,12 +4,11 @@ from selenium import webdriver
 from datetime import date, timedelta
 from subprocess import call
 import sys
-# import os
 import youtube_dl
 
 
 def soupify(url):
-    driver = webdriver.PhantomJS()
+    driver = webdriver.Chrome()
     driver.get(url)
 
     data = driver.page_source
@@ -30,7 +29,11 @@ def find_days_games(soup, date):
 def my_hook(d):
     if d['status'] == 'finished':
         print('Finished downloading %s' % d['filename'])
-        print("Filename: %s" % d['filename'])
+        try:
+            if sys.argv[2]:
+                call('open "%s"' % d['filename'], shell=True)
+        except:
+            print('\n')
 
 def download_games(game_urls):
     ydl_opts = {
@@ -39,20 +42,23 @@ def download_games(game_urls):
     "outtmpl": "%(title)s.%(ext)s",
     "progress_hooks": [my_hook],
     "nooverwrites": True,
-    "no_warnings": True
+    "no_warnings": True,
+    "ignoreerrors": True
     }
-    meta = youtube_dl.YoutubeDL(ydl_opts).extract_info(game_urls[0], download=False)
-    print 'upload date : %s' %(meta['upload_date'])
-    print 'id          : %s' %(meta['id'])
-    print 'format      : %s' %(meta['format'])
-    print 'duration    : %s' %(meta['duration'])
-    print 'title       : %s' %(meta['title'])
-    print 'description : %s' %(meta['description'])
+    for game_url in game_urls:
+        meta = youtube_dl.YoutubeDL(ydl_opts).extract_info(game_url, download=False)
+        print 'upload date : %s' %(meta['upload_date'])
+        print 'id          : %s' %(meta['id'])
+        print 'format      : %s' %(meta['format'])
+        print 'duration    : %s' %(meta['duration'])
+        print 'title       : %s' %(meta['title'])
+        print 'description : %s' %(meta['description'])
     youtube_dl.YoutubeDL(ydl_opts).download(game_urls)
 
 
 
 if __name__ == '__main__':
+    print(sys.argv)
     try:
         days_ago = int(sys.argv[1])
     except:
@@ -62,11 +68,11 @@ if __name__ == '__main__':
     soup = soupify(url)
     game_urls = find_days_games(soup, date)
     download_games(game_urls)
-    call('open *.mp4', shell=True)
-
-
-
-
+    # try:
+    #     if sys.argv[2]:
+    #         print("All Done!")
+    # except:
+    #     call('open *.mp4', shell=True)
 
 
 
