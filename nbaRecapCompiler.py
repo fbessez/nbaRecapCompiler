@@ -77,6 +77,7 @@ if __name__ == '__main__':
     soup = soupify(url)
     game_urls = find_days_games(soup, date)
     download_games(game_urls)
+    call("killall chromedriver", shell=True)
     exit()
 
 
