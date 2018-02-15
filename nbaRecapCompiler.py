@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from datetime import date, timedelta
 from subprocess import call
 import sys
@@ -8,7 +9,14 @@ import youtube_dl
 
 
 def soupify(url):
-    driver = webdriver.Chrome()
+    chrome_options = Options()
+    # chrome_options.add_argument("--disable-extensions")
+    # chrome_options.add_argument("--window-position=-0,0");
+    # chrome_options.add_argument("--window-size=0,0")
+    # driver.set_window_position(0, 0)
+    # driver.set_window_size(0,0)
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome('/usr/local/bin/chromedriver', chrome_options=chrome_options)
     driver.get(url)
 
     data = driver.page_source
@@ -53,6 +61,7 @@ def download_games(game_urls):
         print 'duration    : %s' %(meta['duration'])
         print 'title       : %s' %(meta['title'])
         print 'description : %s' %(meta['description'])
+        print '-----------------------------------------'
     youtube_dl.YoutubeDL(ydl_opts).download(game_urls)
 
 
@@ -68,11 +77,7 @@ if __name__ == '__main__':
     soup = soupify(url)
     game_urls = find_days_games(soup, date)
     download_games(game_urls)
-    # try:
-    #     if sys.argv[2]:
-    #         print("All Done!")
-    # except:
-    #     call('open *.mp4', shell=True)
+    exit()
 
 
 
