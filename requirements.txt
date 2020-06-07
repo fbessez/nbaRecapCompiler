@@ -1,0 +1,7 @@
+chromedriver
+selenium
+webdriver-manager
+BeautifulSoup4
+youtube-dl
+ffmpeg
+lxml

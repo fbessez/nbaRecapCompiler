@@ -7,7 +7,6 @@ from subprocess import call
 import sys
 import youtube_dl
 
-
 def soupify(url):
     chrome_options = Options()
     # chrome_options.add_argument("--disable-extensions")
@@ -64,8 +63,6 @@ def download_games(game_urls):
         print '-----------------------------------------'
     youtube_dl.YoutubeDL(ydl_opts).download(game_urls)
 
-
-
 if __name__ == '__main__':
     print(sys.argv)
     try:
@@ -79,11 +76,3 @@ if __name__ == '__main__':
     download_games(game_urls)
     call("killall chromedriver", shell=True)
     exit()
-
-
-
-
-
-
-
-

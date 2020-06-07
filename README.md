@@ -20,7 +20,6 @@ All you need to do is run: ```python2.7 nbaRecapCompiler.py <number_of_days_ago_
 * Thank you [youtube-dl](https://rg3.github.io/youtube-dl/)
 * Thank you [beautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
 
-
 ## Set up
 
 `sudo pip install BeautifulSoup4 && sudo pip install selenium && sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl && sudo chmod a+rx /usr/local/bin/youtube-dl && sudo pip install lxml && brew install ffmpeg`
